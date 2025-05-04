@@ -9,7 +9,7 @@ from utils.managment import mgmt_command, parse_status, record_traffic
 app = FastAPI(title="OpenVPN Management via Management Interface")
 
 
-# --- Эндпоинты Management Interface ---
+# --- Endpointы Management Interface ---
 @app.get("/management/status/", response_model=list[dict])
 async def management_status():
     """Получить raw-статус через management-интерфейс."""
@@ -31,7 +31,7 @@ async def management_kill(client_name: str):
     return {"message": resp}
 
 
-# --- Существующие эндпоинты для add/del — как было ранее ---
+# --- Существующие Endpointы для add/del — как было ранее ---
 async def run_script(script_path: str, args: list):
     try:
         result = subprocess.run(
@@ -83,7 +83,7 @@ async def start_scheduler():
     scheduler.start()
 
 
-# --- Эндпоинт истории трафика пользователя ---
+# --- Endpoint истории трафика пользователя ---
 @app.get("/traffic/history/{name}", response_model=list[dict])
 async def traffic_history(name: str, limit: int = 50):
     db = SessionLocal()
@@ -101,3 +101,4 @@ async def traffic_history(name: str, limit: int = 50):
             "bytes_sent": r.bytes_sent,
         } for r in rows
     ]
+
